@@ -5,7 +5,7 @@ on:
   workflow_run:
     workflows: ["Feature Branch"]
     types:
-      - completed
+      - requested
 
   # # Manual trigger
   workflow_dispatch:
