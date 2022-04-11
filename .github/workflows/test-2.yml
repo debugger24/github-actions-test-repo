@@ -2,13 +2,10 @@
 name: Check Result
 
 on:
-  workflow_run:
-    workflows: ["Feature Branch"]
-    types:
-      - requested
-
   # # Manual trigger
   workflow_dispatch:
+  issue_comment:
+    types: [created]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -19,6 +16,13 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: khan/pull-request-comment-trigger@v1.1.0
+        id: check
+        with:
+          trigger: "@deploy"
+          reaction: rocket
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
@@ -31,6 +35,3 @@ jobs:
         run: |
           echo Add other actions to build,
           date
-
-
-
