@@ -5,7 +5,7 @@ on:
   workflow_run:
     workflows: ["Feature Branch"]
     types:
-      - completed
+      - requested
 
   # # Manual trigger
   workflow_dispatch:
@@ -31,4 +31,5 @@ jobs:
         run: |
           echo Add other actions to build,
           date
+
 
