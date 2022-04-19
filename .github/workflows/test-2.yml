@@ -54,7 +54,7 @@ jobs:
     name: post output in PR comments
     runs-on: ubuntu-latest
     needs: [build_a]
-    if: ${{needs.build_a.outputs.triggered}}
+    if: ${{needs.build_a.outputs.triggered == 'true'}}
     steps:
       - name: post output
         uses: mshick/add-pr-comment@v1
