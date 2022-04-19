@@ -46,3 +46,17 @@ jobs:
         run: |
           echo Add other actions to build,
           git log
+
+  post_comment:
+    name: post output in PR comments
+    runs-on: ubuntu-latest
+    steps:
+      - name: post output
+        uses: mshick/add-pr-comment@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            <h2>E2E Test Result</h2>
+            echo ${GITHUB_REF#refs/heads/}
+          allow-repeats: true
