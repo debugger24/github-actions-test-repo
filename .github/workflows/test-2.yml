@@ -8,11 +8,12 @@ on:
   #   types: [created]
   # pull_request:
   #   types: [opened]
-  workflow_run:
-    workflows:
-      - "FeatureBranch"
-    types:
-      - completed
+  # workflow_run:
+  #   workflows:
+  #     - "FeatureBranch"
+  #   types:
+  #     - completed
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -34,8 +35,11 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Ref
+        run: |
+          echo $GITHUB_HEAD_REF
+          echo "-------"
+          echo ${GITHUB_REF#refs/heads/}
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
