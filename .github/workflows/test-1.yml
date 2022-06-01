@@ -17,10 +17,10 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
-          echo {{ matrix.cluster_env }}
+          echo ${{ matrix.cluster_env }}
       - uses: dorny/paths-filter@v2
         id: changes
         with:
           filters: |
             cluster_env:
-              - 'env/{{ matrix.cluster_env }}.yaml'
+              - 'env/${{ matrix.cluster_env }}.yaml'
