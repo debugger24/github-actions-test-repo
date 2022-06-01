@@ -30,7 +30,8 @@ jobs:
     strategy:
       matrix:
         cluster_env: ["a", "b"]
+    environment: ${{ matrix.cluster_env }}
     steps:
-    - name: Check result
-      run: |
-        echo ${{ needs.check-change.outputs }}
+      - name: Check result
+        run: |
+          echo ${{ needs.check-change.outputs }}
