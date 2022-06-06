@@ -24,8 +24,9 @@ jobs:
           filters: |
             cluster_env:
               - 'env/${{ matrix.cluster_env }}.yaml'
-    outputs:
-      ${{ matrix.cluster_env }}: ${{ steps.changes.outputs.cluster_env }}
+      - name: Set output
+        run: |
+          echo "::set-output ${{ matrix.cluster_env }}-changed=${{ steps.changes.outputs.cluster_env }}"
   apply-change:
     needs: [check-change]
     runs-on: ubuntu-latest
@@ -38,5 +39,5 @@ jobs:
       - name: Check result
         run: |
           echo ${{ needs.check-change.outputs.is_changed }}
-          echo ${{ needs.check-change.outputs.a }}
+          echo ${{ needs.check-change.outputs.a-is_changed }}
           echo ${{ needs.check-change.outputs.a.is_changed }}
