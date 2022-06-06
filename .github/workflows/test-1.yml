@@ -25,7 +25,7 @@ jobs:
             cluster_env:
               - 'env/${{ matrix.cluster_env }}.yaml'
     outputs:
-      is_changed: ${{ steps.changes.outputs.cluster_env }}
+      ${{ matrix.cluster_env }}: ${{ steps.changes.outputs.cluster_env }}
   apply-change:
     needs: [check-change]
     runs-on: ubuntu-latest
