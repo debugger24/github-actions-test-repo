@@ -38,5 +38,6 @@ jobs:
     steps:
       - name: Check result
         run: |
+          echo ${{ needs.check-change.outputs }}
           echo ${{ needs.check-change.outputs.a-changed }}
           echo ${{ needs.check-change.outputs.b-changed }}
