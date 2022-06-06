@@ -37,4 +37,4 @@ jobs:
     steps:
       - name: Check result
         run: |
-          echo ${{ needs.changes.outputs.is_changed }}
+          echo ${{ needs.changes.outputs }}
