@@ -19,7 +19,7 @@ jobs:
           list-files: shell
           filters: |
             cluster_envs:
-              - 'env/**.yaml'
+              - added|modified: 'env/**.yaml'
       - name: Set output
         id: is_changed
         run: |
