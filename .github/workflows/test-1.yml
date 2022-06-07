@@ -32,11 +32,9 @@ jobs:
     strategy: 
       matrix:
         cluster_env: ["a", "b"]
-    # environment: ${{ matrix.cluster_env }}
-    # if: ${{ needs.changes.outputs.is_changed == 'true' }}
+    environment: ${{ matrix.cluster_env }}
+    if: ${{ needs.check-change.outputs.is_changed_${{ matrix.cluster_env }} }} == 'true'
     steps:
       - name: Check result
         run: |
-          echo ${{ needs.check-change.outputs }}
-          echo ${{ needs.check-change.outputs.is_changed_a }}
-          echo ${{ needs.check-change.outputs.is_changed_b }}
+          echo ${{ needs.check-change.outputs.is_changed_${{ matrix.cluster_env }} }}
