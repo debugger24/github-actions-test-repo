@@ -7,15 +7,36 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  plan-and-apply:
+  check-change:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         cluster_env: ["a", "b"]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2.4.2
-      - uses: ./.github/workflows/plan_apply
-        id: run-child
+      - uses: dorny/paths-filter@v2
+        id: changes
         with:
-          cluster_env: ${{ matrix.cluster_env }}
+          filters: |
+            cluster_env:
+              - 'env/${{ matrix.cluster_env }}.yaml'
+      - name: Set output
+        id: is_changed
+        run: |
+          if steps.changes.outputs.cluster_env == 'true'
+          then
+            echo ::set-output name=matrix::{$matrix, {"env_name": "${{ matrix.cluster_env }}"}}
+          fi
+    outputs:
+      env_changed: "{\"include\":[ ${{ steps.is_changed.outputs.matrix }} ]}"
+  apply-change:
+    needs: [check-change]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cluster_env: ["a", "b"]
+    environment: ${{ matrix.cluster_env }}
+    # if: ${{ needs.check-change.outputs.is_changed_a == 'true' }}
+    steps:
+      - name: Check result
+        run: |
+          echo ${{ needs.check-change.outputs.env_changed }}

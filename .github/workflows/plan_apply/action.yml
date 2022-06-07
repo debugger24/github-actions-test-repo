@@ -1,35 +1,46 @@
-name: Plan & Apply
-on:
-  workflow_call:
-    inputs:
-      cluster_env:
-        required: true
-        type: string
-jobs:
-  check-change:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            cluster_env:
-              - 'env/${{ inputs.cluster_env }}.yaml'
-      - name: Set output
-        id: is_changed
-        run: |
-          echo "::set-output name=is_changed::${{ steps.changes.outputs.cluster_env }}"
-    outputs:
-      is_changed: ${{ steps.is_changed.outputs.is_changed }}
-  apply-change:
-    needs: [check-change]
-    runs-on: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #     cluster_env: ["a", "b"]
-    # environment: ${{ matrix.cluster_env }}
-    if: ${{ needs.check-change.outputs.is_changed == 'true' }}
-    steps:
-      - name: Check result
-        run: |
-          echo ${{ needs.check-change.outputs.is_changed }}
+# name: Plan & Apply
+# on:
+#   workflow_call:
+# inputs:
+#   cluster_env:
+#     required: true
+#     type: string
+# runs:
+#   steps:
+#     - run: echo Hello ${{ inputs.who-to-greet }}.
+#       shell: bash
+#     - id: random-number-generator
+#       run: echo "::set-output name=random-number::$(echo $RANDOM)"
+#       shell: bash
+#     - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+#       shell: bash          
+#     - run: goodbye.sh
+#       shell: bash
+# jobs:
+#   check-change:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: dorny/paths-filter@v2
+#         id: changes
+#         with:
+#           filters: |
+#             cluster_env:
+#               - 'env/${{ inputs.cluster_env }}.yaml'
+#       - name: Set output
+#         id: is_changed
+#         run: |
+#           echo "::set-output name=is_changed::${{ steps.changes.outputs.cluster_env }}"
+#     outputs:
+#       is_changed: ${{ steps.is_changed.outputs.is_changed }}
+#   apply-change:
+#     needs: [check-change]
+#     runs-on: ubuntu-latest
+#     # strategy:
+#     #   matrix:
+#     #     cluster_env: ["a", "b"]
+#     # environment: ${{ matrix.cluster_env }}
+#     if: ${{ needs.check-change.outputs.is_changed == 'true' }}
+#     steps:
+#       - name: Check result
+#         run: |
+#           echo ${{ needs.check-change.outputs.is_changed }}
