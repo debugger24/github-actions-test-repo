@@ -33,8 +33,8 @@ jobs:
       matrix:
         cluster_env: ["a", "b"]
     # environment: ${{ matrix.cluster_env }}
-    if: ${{ needs.check-change.outputs.a }}
+    if: ${{ needs.check-change.outputs.b }}
     steps:
       - name: Check result
         run: |
-          echo ${{ needs.check-change.outputs.a }}
+          echo ${{ needs.check-change.outputs.b }}
