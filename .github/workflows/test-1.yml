@@ -9,9 +9,6 @@ on:
 jobs:
   check-change:
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #     cluster_env: ["a", "b"]
     steps:
       - uses: dorny/paths-filter@v2
         id: changes
@@ -29,11 +26,11 @@ jobs:
       cluster_env_changed: ${{ steps.changes.outputs.cluster_envs_files }}
   reusable_workflow_job:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        cluster_env: ${{ fromJSON(needs.check-change.outputs.cluster_env_changed) }}
+    # strategy:
+    #   matrix:
+    #     cluster_env: ${{ fromJSON(needs.check-change.outputs.cluster_env_changed) }}
     # environment: production
     steps:
       - uses: ./.github/workflows/PlanAndApply
         with:
-          cluster_env: ${{ matrix.cluster_env }}
+          cluster_env: testing
