@@ -25,6 +25,7 @@ jobs:
     outputs:
       cluster_env_changed: ${{ steps.changes.outputs.cluster_envs_files }}
   reusable_workflow_job:
+    needs: [check-change]
     runs-on: ubuntu-latest
     # strategy:
     #   matrix:
