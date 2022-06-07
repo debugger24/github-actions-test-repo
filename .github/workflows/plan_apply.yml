@@ -12,12 +12,13 @@ jobs:
   plan:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo
+      - name: Echo 1
         run: |
           echo ${{ inputs.cluster_env }}
   apply:
     runs-on: ubuntu-latest
+    needs: [plan]
     steps:
-      - name: Echo
+      - name: Echo 2
         run: |
           echo ${{ inputs.cluster_env }}
