@@ -27,15 +27,7 @@ jobs:
     outputs:
       cluster_env_changed: ${{ steps.changes.outputs.cluster_envs_files }}
   reusable_workflow_job:
-    needs: [check-change]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        cluster_env: ${{ fromJSON(needs.check-change.outputs.cluster_env_changed) }}
-    # environment: production
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2.4.2
-      - uses: ./.github/workflows/plan_apply.yaml
-        with:
-          cluster_env: testing
+    uses: ./.github/workflows/plan_apply.yaml
+    with:
+      cluster_env: testing
+      
