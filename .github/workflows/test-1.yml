@@ -8,7 +8,6 @@ on:
     branches: [main]
 jobs:
   check-change:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -23,7 +22,7 @@ jobs:
       - name: Set output
         id: is_changed
         run: |
-          echo "::set-output cluster_${{ matrix.cluster_env }}=${{ steps.changes.outputs.cluster_env }}"
+          echo "::set-output name=cluster_${{ matrix.cluster_env }}::${{ steps.changes.outputs.cluster_env }}"
     outputs:
       is_changed_a: ${{ steps.is_changed.outputs.cluster_a }}
       is_changed_b: ${{ steps.is_changed.outputs.cluster_b }}
@@ -33,7 +32,7 @@ jobs:
     strategy: 
       matrix:
         cluster_env: ["a", "b"]
-    environment: ${{ matrix.cluster_env }}
+    # environment: ${{ matrix.cluster_env }}
     # if: ${{ needs.changes.outputs.is_changed == 'true' }}
     steps:
       - name: Check result
