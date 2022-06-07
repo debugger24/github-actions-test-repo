@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  check-change:
+  plan-and-apply:
     runs-on: ubuntu-latest
     strategy:
       matrix:
