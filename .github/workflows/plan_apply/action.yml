@@ -24,7 +24,7 @@ jobs:
   apply-change:
     needs: [check-change]
     runs-on: ubuntu-latest
-    # strategy: 
+    # strategy:
     #   matrix:
     #     cluster_env: ["a", "b"]
     # environment: ${{ matrix.cluster_env }}
