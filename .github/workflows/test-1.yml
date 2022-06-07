@@ -34,7 +34,7 @@ jobs:
     strategy:
       matrix:
         cluster_env: ${{ fromJSON(needs.check-change.outputs.cluster_env_changed) }}
-    # environment: ${{ matrix.cluster_env }}
+    environment: ${{ matrix.cluster_env }}
     # if: ${{ needs.check-change.outputs.is_changed_a == 'true' }}
     steps:
       - name: Check result
