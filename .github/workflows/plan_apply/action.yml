@@ -2,9 +2,9 @@
 # on:
 #   workflow_call:
 # inputs:
-#   cluster_env:
-#     required: true
-#     type: string
+  cluster_env:
+    required: true
+    type: string
 # runs:
 #   steps:
 #     - run: echo Hello ${{ inputs.who-to-greet }}.
@@ -32,15 +32,15 @@
 #           echo "::set-output name=is_changed::${{ steps.changes.outputs.cluster_env }}"
 #     outputs:
 #       is_changed: ${{ steps.is_changed.outputs.is_changed }}
-#   apply-change:
-#     needs: [check-change]
-#     runs-on: ubuntu-latest
-#     # strategy:
-#     #   matrix:
-#     #     cluster_env: ["a", "b"]
-#     # environment: ${{ matrix.cluster_env }}
-#     if: ${{ needs.check-change.outputs.is_changed == 'true' }}
-#     steps:
-#       - name: Check result
-#         run: |
-#           echo ${{ needs.check-change.outputs.is_changed }}
+  # apply-change:
+  #   needs: [check-change]
+  #   runs-on: ubuntu-latest
+  #   # strategy:
+  #   #   matrix:
+  #   #     cluster_env: ["a", "b"]
+  #   # environment: ${{ matrix.cluster_env }}
+  #   if: ${{ needs.check-change.outputs.is_changed == 'true' }}
+  #   steps:
+  #     - name: Check result
+  #       run: |
+  #         echo ${{ needs.check-change.outputs.is_changed }}
