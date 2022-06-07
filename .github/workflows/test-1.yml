@@ -23,7 +23,7 @@ jobs:
       - name: Set output
         id: is_changed
         run: |
-          echo ${{ steps.changes.outputs.cluster_envs }}
+          echo ${{ steps.changes.outputs.cluster_envs_files }}
           # echo "::set-output name=cluster_${{ matrix.cluster_env }}::${{ steps.changes.outputs.cluster_envs }}"
   #   outputs:
   #     is_changed_a: ${{ steps.is_changed.outputs.cluster_a }}
