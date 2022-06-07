@@ -22,10 +22,10 @@ jobs:
       - name: Set output
         id: is_changed
         run: |
-          echo "::set-output name=cluster_${{ matrix.cluster_env }}::${{ steps.changes.outputs.cluster_env }}"
+          echo "::set-output name=${{ matrix.cluster_env }}::${{ steps.changes.outputs.cluster_env }}"
     outputs:
-      is_changed_a: ${{ steps.is_changed.outputs.cluster_a }}
-      is_changed_b: ${{ steps.is_changed.outputs.cluster_b }}
+      a: ${{ steps.is_changed.outputs.a }}
+      b: ${{ steps.is_changed.outputs.b }}
   apply-change:
     needs: [check-change]
     runs-on: ubuntu-latest
@@ -33,8 +33,8 @@ jobs:
       matrix:
         cluster_env: ["a", "b"]
     environment: ${{ matrix.cluster_env }}
-    if: ${{ needs.check-change.outputs.is_changed_a }} == 'true'
+    if: ${{ needs.check-change.outputs.a }} == 'true'
     steps:
       - name: Check result
         run: |
-          echo ${{ needs.check-change.outputs.is_changed_a }}
+          echo ${{ needs.check-change.outputs.a }}
