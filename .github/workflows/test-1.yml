@@ -13,7 +13,7 @@ jobs:
       matrix:
         cluster_env: ["a", "b"]
     steps:
-      - uses: ./.github/workflows/plan_apply.yaml
+      - uses: ./.github/workflows/plan_apply
         id: run-child
         with:
           cluster_env: ${{ matrix.cluster_env }}
