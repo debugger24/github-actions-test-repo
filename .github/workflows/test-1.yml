@@ -16,7 +16,7 @@ jobs:
       - uses: dorny/paths-filter@v2
         id: changes
         with:
-          list-files: shell
+          list-files: json
           filters: |
             cluster_envs:
               - added|modified: 'env/**.yaml'
