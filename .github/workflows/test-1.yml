@@ -27,9 +27,9 @@ jobs:
   reusable_workflow_job:
     needs: [check-change]
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #     cluster_env: ${{ fromJSON(needs.check-change.outputs.cluster_env_changed) }}
+    strategy:
+      matrix:
+        cluster_env: ${{ fromJSON(needs.check-change.outputs.cluster_env_changed) }}
     # environment: production
     steps:
       - uses: ./.github/workflows/plan_apply
