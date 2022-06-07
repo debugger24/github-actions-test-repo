@@ -31,6 +31,6 @@ jobs:
     #     cluster_env: ${{ fromJSON(needs.check-change.outputs.cluster_env_changed) }}
     # environment: production
     steps:
-      - uses: ./.github/workflows/PlanAndApply
+      - uses: ./.github/workflows/plan_apply
         with:
           cluster_env: testing
