@@ -25,18 +25,18 @@ jobs:
         run: |
           echo ${{ steps.changes.outputs.cluster_envs_files }}
           # echo "::set-output name=cluster_${{ matrix.cluster_env }}::${{ steps.changes.outputs.cluster_envs }}"
-  #   outputs:
-  #     is_changed_a: ${{ steps.is_changed.outputs.cluster_a }}
+    outputs:
+      cluster_env_changed: ${{ steps.changes.outputs.cluster_envs_files }}
   #     is_changed_b: ${{ steps.is_changed.outputs.cluster_b }}
-  # apply-change:
-  #   needs: [check-change]
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       cluster_env: ["a", "b"]
-  #   environment: ${{ matrix.cluster_env }}
-  #   if: ${{ needs.check-change.outputs.is_changed_a == 'true' }}
-  #   steps:
-  #     - name: Check result
-  #       run: |
-  #         echo ${{ needs.check-change.outputs.is_changed_a }}
+  apply-change:
+    needs: [check-change]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cluster_env: ${{ fromJSON(needs.check-change.outputs.cluster_env_changed) }}
+    # environment: ${{ matrix.cluster_env }}
+    # if: ${{ needs.check-change.outputs.is_changed_a == 'true' }}
+    steps:
+      - name: Check result
+        run: |
+          echo ${{ needs.check-change.outputs.is_changed_a }}
