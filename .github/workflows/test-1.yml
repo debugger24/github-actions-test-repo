@@ -22,8 +22,9 @@ jobs:
       - name: Set output
         id: is_changed
         run: |
-          if steps.changes.outputs.cluster_env == 'true'
+          if ${{ steps.changes.outputs.cluster_env }} == 'true'
           then
+            echo "Found change"
             echo ::set-output name=matrix::{$matrix, {"env_name": "${{ matrix.cluster_env }}"}}
           fi
     outputs:
