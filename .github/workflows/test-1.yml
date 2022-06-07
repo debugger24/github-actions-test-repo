@@ -13,28 +13,7 @@ jobs:
       matrix:
         cluster_env: ["a", "b"]
     steps:
-      - uses: dorny/paths-filter@v2
-        id: changes
+      steps:
+      - uses: ./.github/workflows/plan_apply
         with:
-          filters: |
-            cluster_env:
-              - 'env/${{ matrix.cluster_env }}.yaml'
-      - name: Set output
-        id: is_changed
-        run: |
-          echo "::set-output name=${{ matrix.cluster_env }}::${{ steps.changes.outputs.cluster_env }}"
-    outputs:
-      a: ${{ steps.is_changed.outputs.a }}
-      b: false
-  apply-change:
-    needs: [check-change]
-    runs-on: ubuntu-latest
-    strategy: 
-      matrix:
-        cluster_env: ["a", "b"]
-    # environment: ${{ matrix.cluster_env }}
-    if: matrix.cluster_env == 'true'
-    steps:
-      - name: Check result
-        run: |
-          echo ${{ needs.check-change.outputs.b }}
+          cluster_env: ${{ matrix.cluster_env }}
