@@ -25,15 +25,15 @@ jobs:
           echo "::set-output name=${{ matrix.cluster_env }}::${{ steps.changes.outputs.cluster_env }}"
     outputs:
       a: ${{ steps.is_changed.outputs.a }}
-      b: ${{ steps.is_changed.outputs.b }}
+      b: false
   apply-change:
     needs: [check-change]
     runs-on: ubuntu-latest
     strategy: 
       matrix:
         cluster_env: ["a", "b"]
-    environment: ${{ matrix.cluster_env }}
-    if: ${{ needs.check-change.outputs.a }} == 'true'
+    # environment: ${{ matrix.cluster_env }}
+    if: ${{ needs.check-change.outputs.a }}
     steps:
       - name: Check result
         run: |
