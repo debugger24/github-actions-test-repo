@@ -37,4 +37,4 @@ jobs:
     steps:
       - name: Check result
         run: |
-          echo ${{ needs.check-change.outputs.is_changed_${{ matrix.cluster_env }} }}
+          echo ${{ needs.check-change.outputs.is_changed_a }}
