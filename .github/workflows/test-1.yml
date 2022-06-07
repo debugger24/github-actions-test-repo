@@ -27,7 +27,7 @@ jobs:
     outputs:
       cluster_env_changed: ${{ steps.changes.outputs.cluster_envs_files }}
   reusable_workflow_job:
-    uses: ./.github/workflows/plan_apply.yaml
+    uses: ./.github/workflows/plan_apply.yml
     with:
       cluster_env: testing
       
