@@ -33,7 +33,7 @@ jobs:
       matrix:
         cluster_env: ["a", "b"]
     environment: ${{ matrix.cluster_env }}
-    if: ${{ needs.check-change.outputs.is_changed_${{ matrix.cluster_env }} }} == 'true'
+    if: ${{ needs.check-change.outputs.is_changed_\${{ matrix.cluster_env }} }} == 'true'
     steps:
       - name: Check result
         run: |
