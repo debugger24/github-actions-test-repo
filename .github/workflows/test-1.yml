@@ -14,10 +14,6 @@ jobs:
       matrix:
         cluster_env: ["a", "b"]
     steps:
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo ${{ matrix.cluster_env }}
       - uses: dorny/paths-filter@v2
         id: changes
         with:
@@ -25,12 +21,16 @@ jobs:
             cluster_env:
               - 'env/${{ matrix.cluster_env }}.yaml'
       - name: Set output
+        id: is_changed
         run: |
-          echo "::set-output ${{ matrix.cluster_env }}-changed=${{ steps.changes.outputs.cluster_env }}"
+          echo "::set-output ${{ matrix.cluster_env }}=${{ steps.changes.outputs.cluster_env }}"
+    outputs:
+      is_changed_a: ${{ steps.is_changed.outputs.a }}
+      is_changed_b: ${{ steps.is_changed.outputs.b }}
   apply-change:
     needs: [check-change]
     runs-on: ubuntu-latest
-    strategy:
+    strategy: 
       matrix:
         cluster_env: ["a", "b"]
     environment: ${{ matrix.cluster_env }}
@@ -39,5 +39,5 @@ jobs:
       - name: Check result
         run: |
           echo ${{ needs.check-change.outputs }}
-          echo ${{ needs.check-change.outputs.a-changed }}
-          echo ${{ needs.check-change.outputs.b-changed }}
+          echo ${{ needs.check-change.outputs.is_changed_a }}
+          echo ${{ needs.check-change.outputs.is_changed_a }}
