@@ -41,7 +41,7 @@ jobs:
         run: |
           echo ${{ matrix.cluster_env }}
   apply-change2:
-    needs: [apply-change]
+    needs: [apply-change, check-change]
     runs-on: ubuntu-latest
     strategy:
       matrix:
