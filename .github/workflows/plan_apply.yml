@@ -7,11 +7,16 @@ on:
       cluster_env:
         required: true
         type: string
+      scripts:
+        required: true
+        type: string
 
 jobs:
   plan:
     runs-on: ubuntu-latest
     environment: ${{ inputs.cluster_env }}
+    strategy:
+      matrix: ${{fromJson(inputs.scripts)}}
     steps:
       - name: Echo 1
         run: |
@@ -19,6 +24,8 @@ jobs:
   apply:
     runs-on: ubuntu-latest
     environment: ${{ inputs.cluster_env }}
+    strategy:
+      matrix: ${{fromJson(inputs.scripts)}}
     needs: [plan]
     steps:
       - name: Echo 2

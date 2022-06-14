@@ -7,31 +7,13 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  # check-change:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2.4.2
-  #     - uses: dorny/paths-filter@v2
-  #       id: changes
-  #       with:
-  #         list-files: json
-  #         filters: |
-  #           cluster_envs:
-  #             - added|modified: 'env/**.yaml'
-  #     - name: Set output
-  #       id: is_changed
-  #       run: |
-  #         echo ${{ steps.changes.outputs.cluster_envs_files }}
-  #         # echo "::set-output name=cluster_${{ matrix.cluster_env }}::${{ steps.changes.outputs.cluster_envs }}"
-  #   outputs:
-  #     cluster_env_changed: ${{ steps.changes.outputs.cluster_envs_files }}
   reusable_workflow_job_a:
     uses: ./.github/workflows/plan_apply.yml
     with:
       cluster_env: a
+      scripts: '["script_a", "script_b"]'
   reusable_workflow_job_b:
     uses: ./.github/workflows/plan_apply.yml
     with:
       cluster_env: b
-      
+      scripts: '["script_a", "script_c"]'
