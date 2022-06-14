@@ -16,7 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.cluster_env }}
     strategy:
-      matrix: ${{fromJson(inputs.scripts)}}
+      matrix:
+        scripts: ${{fromJson(inputs.scripts)}}
     steps:
       - name: Echo 1
         run: |
@@ -25,7 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.cluster_env }}
     strategy:
-      matrix: ${{fromJson(inputs.scripts)}}
+      matrix:
+        scripts: ${{fromJson(inputs.scripts)}}
     needs: [plan]
     steps:
       - name: Echo 2
