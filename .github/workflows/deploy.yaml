@@ -15,4 +15,4 @@ jobs:
   steps:
     - name: demo
       run: |
-        echo ${{ matrix.cluster }}
+        echo "Testing"
