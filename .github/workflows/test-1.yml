@@ -19,4 +19,4 @@ jobs:
   build_1:
     uses: ./.github/workflows/deploy.yaml
     with:
-      inputs: '["a", "b"]'
+      list_of_items: '["a", "b"]'
