@@ -9,10 +9,11 @@ on:
         type: string
 jobs:
   demo:
-  strategy:
-    matrix:
-      cluster: ${{ fromJSON( inputs.list_of_items ) }}
-  steps:
-    - name: demo
-      run: |
-        echo "Testing"
+    strategy:
+      matrix:
+        cluster: ${{ fromJSON( inputs.list_of_items ) }}
+        # cluster: ["x", "y"]
+    steps:
+      - name: demo
+        run: |
+          echo "Testing"
