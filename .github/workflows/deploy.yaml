@@ -14,5 +14,5 @@ jobs:
       cluster: ${{ fromJSON( inputs.list_of_items ) }}
   steps:
     - name: demo
-      runs: |
+      run: |
         echo ${{ matrix.cluster }}
