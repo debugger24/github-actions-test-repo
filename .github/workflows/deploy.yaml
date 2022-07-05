@@ -9,6 +9,7 @@ on:
         type: string
 jobs:
   demo:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         cluster: ${{ fromJSON( inputs.list_of_items ) }}
