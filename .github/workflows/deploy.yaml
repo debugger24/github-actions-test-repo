@@ -11,8 +11,9 @@ jobs:
   demo:
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJSON( inputs.list_of_items ) }}
-        # cluster: 
+      matrix:
+        ${{ fromJSON( inputs.list_of_items ) }}
+        # cluster:
         # cluster: ["x", "y"]
         # include:
         #   - deployment_env: "uat"
