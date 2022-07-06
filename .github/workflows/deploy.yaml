@@ -3,26 +3,26 @@ name: PlanAndApply
 
 on:
   workflow_call:
-    # inputs:
-    #   list_of_items:
-    #     required: true
-    #     type: string
+    inputs:
+      list_of_items:
+        required: true
+        type: string
 jobs:
   demo:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # cluster: ${{ fromJSON( inputs.list_of_items ) }}
+        cluster: ${{ fromJSON( inputs.list_of_items ) }}
         # cluster: ["x", "y"]
-        include:
-          - deployment_env: "uat"
-            env_name: "demo1"
-          - deployment_env: "uat"
-            env_name: "demo2"
-          - deployment_env: "prod"
-            env_name: "demoa"
-          - deployment_env: "prod"
-            env_name: "demob"
+        # include:
+        #   - deployment_env: "uat"
+        #     env_name: "demo1"
+        #   - deployment_env: "uat"
+        #     env_name: "demo2"
+        #   - deployment_env: "prod"
+        #     env_name: "demoa"
+        #   - deployment_env: "prod"
+        #     env_name: "demob"
     steps:
       - name: demo
         run: |
