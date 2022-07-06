@@ -20,10 +20,10 @@ jobs:
     uses: ./.github/workflows/deploy.yaml
     with:
       list_of_items: >
-        '{"include":[
+        {"include":[
           {"deployment_env":"uat","env_name":"demo1"},
           {"deployment_env":"uat","env_name":"demo2"},
           {"deployment_env":"prod","env_name":"demoa"},
           {"deployment_env":"prod","env_name":"demob"}
           ]
-        }'
+        }
